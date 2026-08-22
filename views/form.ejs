@@ -1,0 +1,20 @@
+<%- include('partials/header') %>
+
+    <form action="/new" method="post">
+        <h2>New message</h2>
+
+        <div>
+            <label for="messageUser">Name:</label>
+            <input type="text" name="messageUser" id="messageUser" required>
+        </div>
+
+        <div>
+            <label for="messageText">Message:</label>
+            <input type="text" name="messageText" id="messageText" required>
+        </div>
+
+        <a href="./">Cancel</a>
+        <button type="submit">Send Message</button>
+    </form>
+
+    <%- include('partials/footer') %>

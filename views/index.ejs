@@ -1,0 +1,24 @@
+<%- include('partials/header') %>
+
+    <h1>Mini Message Board</h1>
+
+    <a href="/new">Add a Message</a>
+
+    <ul>
+        <% messages.forEach((message, index)=> { %>
+            <li>
+                <strong>
+                    <%= message.user %>:
+                </strong>
+                <%= message.text %>
+                    </br>
+                    <%= message.added.toLocaleDateString() %> at <%= message.added.toLocaleTimeString([], {
+                            hour: '2-digit' , minute: '2-digit' }) %>
+
+                            </br>
+                            <a href="/message/<%= index %>">Open</a>
+            </li>
+            <% }); %>
+    </ul>
+
+    <%- include('partials/footer') %>
