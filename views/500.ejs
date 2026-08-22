@@ -1,0 +1,14 @@
+<%- include('partials/header') %>
+
+    <h1>500 - Something Went Wrong</h1>
+    <p>Sorry, an unexpected error occurred on our end.</p>
+
+    <% if (message) { %>
+        <p><strong>Error:</strong>
+            <%= message %>
+        </p>
+        <% } %>
+
+            <a href="/">Back to home</a>
+
+            <%- include('partials/footer') %>

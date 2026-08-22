@@ -22,6 +22,15 @@ app.use('/new', newMessageRouter);
 app.use('/message', messageRouter);
 app.use('/', indexRouter);
 
+app.use((req, res) => {
+  res.status(404).render('404');
+});
+
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).render('500', { message: err.message });
+});
+
 app.listen(port, (error) => {
   if (error) {
     throw error;
