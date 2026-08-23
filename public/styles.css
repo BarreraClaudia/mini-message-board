@@ -374,8 +374,8 @@ button {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: var(--blush);
-  color: var(--blush-deep);
+  background: var(--sage);
+  color: var(--sage-deep);
   font-size: 26px;
   margin-bottom: 18px;
 }
