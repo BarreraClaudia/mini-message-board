@@ -1,24 +1,58 @@
 <%- include('partials/header') %>
 
-    <h1>Mini Message Board</h1>
+    <section class="hero">
+        <h1 class="index-heading">Spread some positivity!</h1>
+        <p class="index-subtitle">A cozy little corner for kind words</p>
+        <a href="/new" class="add-message-link">
+            <span class="mdi mdi-pencil-outline" aria-hidden="true"></span>
+            Add a Message
+        </a>
+    </section>
 
-    <a href="/new">Add a Message</a>
+    <% const tones=[ 'blush' , 'sage' , 'yale' ]; const tapeIcons=[ 'mdi-heart-outline' , 'mdi-flower-outline'
+        , 'mdi-star-four-points-outline' ]; %>
 
-    <ul>
-        <% messages.forEach((message, index)=> { %>
-            <li>
-                <strong>
-                    <%= message.user %>:
-                </strong>
-                <%= message.text %>
-                    </br>
-                    <%= message.added.toLocaleDateString() %> at <%= message.added.toLocaleTimeString([], {
-                            hour: '2-digit' , minute: '2-digit' }) %>
+        <% if (messages.length===0) { %>
+            <div class="empty-state">
+                <span class="mdi mdi-flower-outline empty-state__icon" aria-hidden="true"></span>
+                <p class="empty-state__text">No messages yet. Be the first to say hello!</p>
+            </div>
+            <% } else { %>
+                <ul class="messages-list">
+                    <% messages.forEach((message, index)=> {
+                        const tone = tones[index % tones.length];
+                        const tapeIcon = tapeIcons[index % tapeIcons.length];
+                        %>
+                        <li class="message-list-item message-list-item--<%= tone %>">
+                            <span class="tape" aria-hidden="true">
+                                <span class="mdi <%= tapeIcon %>"></span>
+                            </span>
 
-                            </br>
-                            <a href="/message/<%= index %>">Open</a>
-            </li>
-            <% }); %>
-    </ul>
+                            <div class="message-list-item__top">
+                                <span class="message-user">
+                                    <span class="mdi mdi-account-heart-outline" aria-hidden="true"></span>
+                                    <%= message.user %>
+                                </span>
 
-    <%- include('partials/footer') %>
+                                <span class="message-date">
+                                    <span class="mdi mdi-clock-outline" aria-hidden="true"></span>
+                                    <%= message.added.toLocaleDateString() %> at <%=
+                                            message.added.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit'
+                                            }) %>
+                                </span>
+                            </div>
+
+                            <p class="message-text">
+                                <%= message.text %>
+                            </p>
+
+                            <a href="/message/<%= index %>" class="message-link">
+                                Open
+                                <span class="mdi mdi-arrow-right" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <% }); %>
+                </ul>
+                <% } %>
+
+                    <%- include('partials/footer') %>

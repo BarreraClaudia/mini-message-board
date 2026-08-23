@@ -1,3 +1,666 @@
+:root {
+  --ink: #0d1821;
+  --yale: #344966;
+  --blush: #e6aace;
+  --porcelain: #f0f4ef;
+  --sage: #bfcc94;
+
+  --blush-deep: color-mix(in srgb, var(--blush) 78%, var(--ink) 22%);
+  --sage-deep: color-mix(in srgb, var(--sage) 78%, var(--ink) 22%);
+  --yale-soft: color-mix(in srgb, var(--yale) 82%, white 18%);
+  --card-bg: var(--porcelain);
+  --shadow-color: color-mix(in srgb, var(--ink) 16%, transparent);
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Quicksand', 'Segoe UI', sans-serif;
+
+  --radius-lg: 22px;
+  --radius-md: 16px;
+  --radius-sm: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
 body {
-  color: darkorchid;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--porcelain);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--yale);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------
+   Header
+--------------------------------------------------------------- */
+
+.site-header {
+  background: var(--blush);
+}
+
+.site-header__inner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 22px 20px 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--ink);
+}
+
+.brand-icon {
+  font-size: 26px;
+  color: var(--yale);
+}
+
+.brand-text {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.2px;
+}
+
+.scallop {
+  display: block;
+  width: 100%;
+  height: 16px;
+}
+
+.scallop--header {
+  fill: var(--porcelain);
+}
+
+.scallop--footer {
+  fill: var(--porcelain);
+}
+
+/* ---------------------------------------------------------------
+   Page shell
+--------------------------------------------------------------- */
+
+.page {
+  flex: 1;
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 32px 20px 56px;
+}
+
+/* ---------------------------------------------------------------
+   Hero / index heading
+--------------------------------------------------------------- */
+
+.hero {
+  text-align: center;
+  margin-bottom: 34px;
+}
+
+.index-heading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(30px, 7vw, 40px);
+  margin: 0 0 8px;
+  color: var(--ink);
+}
+
+.index-subtitle {
+  margin: 0 0 22px;
+  color: var(--yale);
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.add-message-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--yale);
+  color: var(--porcelain);
+  font-weight: 600;
+  font-size: 15px;
+  padding: 12px 24px;
+  border-radius: 999px;
+  box-shadow: 0 6px 0 var(--ink);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.add-message-link .mdi {
+  font-size: 18px;
+}
+
+.add-message-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--ink);
+}
+
+.add-message-link:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 var(--ink);
+}
+
+/* ---------------------------------------------------------------
+   Message list / cards
+--------------------------------------------------------------- */
+
+.messages-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.message-list-item {
+  position: relative;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 26px 20px 20px;
+  box-shadow:
+    0 10px 24px -12px var(--shadow-color),
+    0 0 0 1px color-mix(in srgb, var(--ink) 6%, transparent);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.message-list-item:hover {
+  transform: translateY(-3px);
+  box-shadow:
+    0 16px 28px -14px var(--shadow-color),
+    0 0 0 1px color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.tape {
+  position: absolute;
+  top: -14px;
+  left: 22px;
+  width: 46px;
+  height: 34px;
+  border-radius: 6px;
+  transform: rotate(-6deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 6px -2px var(--shadow-color);
+}
+
+.tape .mdi {
+  font-size: 16px;
+}
+
+.message-list-item--blush .tape {
+  background: var(--blush);
+  color: var(--blush-deep);
+}
+
+.message-list-item--sage .tape {
+  background: var(--sage);
+  color: var(--sage-deep);
+}
+
+.message-list-item--yale .tape {
+  background: var(--yale-soft);
+  color: var(--porcelain);
+}
+
+.message-list-item--blush {
+  border-left: 5px solid var(--blush);
+}
+
+.message-list-item--sage {
+  border-left: 5px solid var(--sage);
+}
+
+.message-list-item--yale {
+  border-left: 5px solid var(--yale);
+}
+
+.message-list-item__top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 6px 14px;
+  margin-bottom: 10px;
+}
+
+.message-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--ink);
+}
+
+.message-user .mdi {
+  font-size: 16px;
+  color: var(--yale);
+}
+
+.message-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--yale);
+  font-weight: 500;
+}
+
+.message-date .mdi {
+  font-size: 14px;
+}
+
+.message-text {
+  margin: 0 0 16px;
+  font-size: 16px;
+  line-height: 1.55;
+  color: var(--ink);
+  overflow-wrap: break-word;
+}
+
+.message-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--yale);
+  border-bottom: 2px solid var(--blush);
+  padding-bottom: 2px;
+  transition:
+    gap 0.15s ease,
+    color 0.15s ease;
+}
+
+.message-link .mdi {
+  font-size: 16px;
+  transition: transform 0.15s ease;
+}
+
+.message-link:hover {
+  color: var(--ink);
+}
+
+.message-link:hover .mdi {
+  transform: translateX(3px);
+}
+
+/* ---------------------------------------------------------------
+   Empty state
+--------------------------------------------------------------- */
+
+.empty-state {
+  text-align: center;
+  padding: 48px 20px;
+  border: 2px dashed var(--sage);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--sage) 14%, var(--porcelain) 86%);
+}
+
+.empty-state__icon {
+  font-size: 34px;
+  color: var(--sage-deep);
+  margin-bottom: 10px;
+  display: block;
+}
+
+.empty-state__text {
+  margin: 0;
+  color: var(--yale);
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------------
+   Message detail page
+--------------------------------------------------------------- */
+
+.message-page {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 40px 26px 32px;
+  text-align: center;
+  box-shadow:
+    0 10px 24px -12px var(--shadow-color),
+    0 0 0 1px color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.message-page__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: var(--blush);
+  color: var(--blush-deep);
+  font-size: 26px;
+  margin-bottom: 18px;
+}
+
+.message-page-user {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(24px, 6vw, 30px);
+  margin: 0 0 16px;
+}
+
+.message-page-text {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink);
+  margin: 0 0 20px;
+  overflow-wrap: break-word;
+}
+
+.message-page-date {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--yale);
+  font-weight: 600;
+  margin: 0 0 28px;
+}
+
+.message-page-date .mdi {
+  font-size: 15px;
+}
+
+/* ---------------------------------------------------------------
+   Home / cancel links (pill outline buttons)
+--------------------------------------------------------------- */
+
+.home-link,
+.cancel-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--yale);
+  border: 2px solid var(--yale);
+  padding: 10px 20px;
+  border-radius: 999px;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.home-link .mdi,
+.cancel-link .mdi {
+  font-size: 16px;
+}
+
+.home-link:hover,
+.cancel-link:hover {
+  background: var(--yale);
+  color: var(--porcelain);
+  transform: translateY(-2px);
+}
+
+/* ---------------------------------------------------------------
+   Form page
+--------------------------------------------------------------- */
+
+.message-form {
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 30px 24px;
+  box-shadow:
+    0 10px 24px -12px var(--shadow-color),
+    0 0 0 1px color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.form-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 26px;
+  margin: 0 0 22px;
+  color: var(--ink);
+}
+
+.form-heading .mdi {
+  font-size: 22px;
+  color: var(--yale);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--yale);
+  margin-bottom: 6px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 13px 16px;
+  font-family: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: var(--porcelain);
+  border: 2px solid color-mix(in srgb, var(--yale) 25%, transparent);
+  border-radius: var(--radius-sm);
+  transition:
+    border-color 0.15s ease,
+    background 0.15s ease;
+}
+
+.form-input::placeholder {
+  color: color-mix(in srgb, var(--ink) 40%, transparent);
+}
+
+.form-input:focus {
+  border-color: var(--yale);
+  background: white;
+  outline: none;
+}
+
+.form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  margin-top: 26px;
+}
+
+.submit-message-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--blush);
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 15px;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 6px 0 var(--blush-deep);
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.submit-message-btn .mdi {
+  font-size: 17px;
+}
+
+.submit-message-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 0 var(--blush-deep);
+}
+
+.submit-message-btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 3px 0 var(--blush-deep);
+}
+
+/* ---------------------------------------------------------------
+   Error pages
+--------------------------------------------------------------- */
+
+.error {
+  text-align: center;
+  background: var(--card-bg);
+  border-radius: var(--radius-lg);
+  padding: 48px 24px;
+  box-shadow:
+    0 10px 24px -12px var(--shadow-color),
+    0 0 0 1px color-mix(in srgb, var(--ink) 6%, transparent);
+}
+
+.error__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--sage);
+  color: var(--sage-deep);
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+
+.error-heading {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 600;
+  font-size: clamp(22px, 6vw, 28px);
+  margin: 0 0 12px;
+}
+
+.error-text {
+  color: var(--yale);
+  font-weight: 500;
+  margin: 0 0 10px;
+}
+
+.error-message {
+  background: color-mix(in srgb, var(--blush) 20%, var(--porcelain) 80%);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--ink);
+  margin: 0 0 24px;
+  overflow-wrap: break-word;
+}
+
+.error .home-link {
+  margin-top: 6px;
+}
+
+/* ---------------------------------------------------------------
+   Footer
+--------------------------------------------------------------- */
+
+.site-footer {
+  background: var(--yale);
+  margin-top: auto;
+}
+
+.site-footer__inner {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 24px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.footer-icon {
+  color: var(--blush);
+  font-size: 16px;
+}
+
+.footer-text {
+  margin: 0;
+  color: var(--porcelain);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+}
+
+/* ---------------------------------------------------------------
+   Larger screens
+--------------------------------------------------------------- */
+
+@media (min-width: 640px) {
+  .site-header__inner {
+    padding: 28px 20px 36px;
+  }
+
+  .brand-text {
+    font-size: 26px;
+  }
+
+  .page {
+    padding: 44px 24px 64px;
+  }
+
+  .message-list-item {
+    padding: 30px 26px 24px;
+  }
+
+  .message-form,
+  .message-page,
+  .error {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
 }

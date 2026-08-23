@@ -1,18 +1,28 @@
 <%- include('partials/header') %>
 
-    <h1>
-        <%= message.user %>'s Message
-    </h1>
+    <div class="message-page">
+        <span class="message-page__icon mdi mdi-flower-outline" aria-hidden="true"></span>
 
-    <p>
-        <%= message.text %>
-    </p>
+        <h1 class="message-page-user">
+            <%= message.user %>'s Message
+        </h1>
 
-    <p>
-        Sent on <%= message.added.toLocaleDateString() %> at
-            <%= message.added.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit' }) %>
-    </p>
+        <p class="message-page-text">
+            <%= message.text %>
+        </p>
 
-    <a href="/">Back to all messages</a>
+        <p class="message-page-date">
+            <span class="mdi mdi-clock-outline" aria-hidden="true"></span>
+            Sent on <%= message.added.toLocaleDateString() %> at
+                <%= message.added.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit' }) %>
+        </p>
+
+        <br />
+
+        <a href="/" class="home-link">
+            <span class="mdi mdi-arrow-left" aria-hidden="true"></span>
+            Back to all messages
+        </a>
+    </div>
 
     <%- include('partials/footer') %>
