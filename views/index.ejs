@@ -36,9 +36,11 @@
 
                                 <span class="message-date">
                                     <span class="mdi mdi-clock-outline" aria-hidden="true"></span>
-                                    <%= message.added.toLocaleDateString() %> at <%=
-                                            message.added.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit'
-                                            }) %>
+                                    <time class="js-local-date" datetime="<%= message.added.toISOString() %>">
+                                        <%= message.added.toLocaleDateString() %> at <%=
+                                                message.added.toLocaleTimeString([], { hour: '2-digit' ,
+                                                minute: '2-digit' }) %>
+                                    </time>
                                 </span>
                             </div>
 

@@ -13,8 +13,11 @@
 
         <p class="message-page-date">
             <span class="mdi mdi-clock-outline" aria-hidden="true"></span>
-            Sent on <%= message.added.toLocaleDateString() %> at
-                <%= message.added.toLocaleTimeString([], { hour: '2-digit' , minute: '2-digit' }) %>
+            Sent on
+            <time class="js-local-date" data-prefix="on " datetime="<%= message.added.toISOString() %>">
+                <%= message.added.toLocaleDateString() %> at <%= message.added.toLocaleTimeString([], { hour: '2-digit'
+                        , minute: '2-digit' }) %>
+            </time>
         </p>
 
         <br />

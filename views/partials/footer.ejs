@@ -16,6 +16,20 @@
     </div>
 </footer>
 
+<script>
+    // The server renders dates in its own timezone as a fallback (for no-JS visitors)
+    // Once the page loads, re-render each timestamp using the visitor's own timezone instead
+    document.querySelectorAll('.js-local-date').forEach(function (el) {
+        const date = new Date(el.getAttribute('datetime'));
+        if (isNaN(date.getTime())) return;
+        const formatted = date.toLocaleDateString() + ' at ' + date.toLocaleTimeString([], {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        el.textContent = formatted;
+    });
+</script>
+
 </body>
 
 </html>
