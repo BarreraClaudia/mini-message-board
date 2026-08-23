@@ -7,7 +7,6 @@ A tiny Express + EJS message board. Post and read messages.
 - Express
 - EJS
 - Vanilla CSS
-- [Material Design Icons](https://pictogrammers.com/library/mdi/) via [jsDelivr CDN](https://cdn.jsdelivr.net/npm/@mdi/font@7.4.47/css/materialdesignicons.min.css)
 - In-memory data store (messages reset when the server restarts)
 
 ## Getting started
@@ -75,4 +74,5 @@ All colors, fonts, and spacing are defined as CSS custom properties at the top o
 ## Notes
 
 - Messages are stored in memory (`models/db.js`) and will reset every time the server restarts. Swap in a real database to persist data.
-- Fonts and icons load from Google Fonts and jsDelivr CDNs.
+- Fonts (Fraunces, Quicksand) load from Google Fonts, and icons load from the jsDelivr-hosted MDI font. Both linked in `views/partials/header.ejs`
+- To browse or look up icon names, use the [Pictogrammers MDI library](https://pictogrammers.com/library/mdi/) — it's just a reference site, not something the app loads from directly.
