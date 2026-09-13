@@ -1,0 +1,9 @@
+<% if (typeof errors !=='undefined' && errors.length) { %>
+    <ul class="form-errors">
+        <% errors.forEach(err=> { %>
+            <li class="form-error">
+                <%= err.msg %>
+            </li>
+            <% }); %>
+    </ul>
+    <% } %>

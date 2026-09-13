@@ -5,6 +5,8 @@
   --porcelain: #f0f4ef;
   --sage: #bfcc94;
 
+  --error: #990f4b;
+
   --blush-deep: color-mix(in srgb, var(--blush) 78%, var(--ink) 22%);
   --sage-deep: color-mix(in srgb, var(--sage) 78%, var(--ink) 22%);
   --yale-soft: color-mix(in srgb, var(--yale) 82%, white 18%);
@@ -551,6 +553,13 @@ button {
 .submit-message-btn:active {
   transform: translateY(2px);
   box-shadow: 0 3px 0 var(--blush-deep);
+}
+
+.form-error {
+  color: var(--error);
+  font-weight: 700;
+  list-style-type: '⚹';
+  padding-left: 3px;
 }
 
 /* ---------------------------------------------------------------

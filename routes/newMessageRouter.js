@@ -1,13 +1,13 @@
 import { Router } from 'express';
 import {
   getMessageForm,
-  createMessage,
+  postMessage,
 } from '../controllers/messageController.js';
 
 const newMessageRouter = Router();
 
 newMessageRouter.get('/', getMessageForm);
 
-newMessageRouter.post('/', createMessage);
+newMessageRouter.post('/', postMessage);
 
 export default newMessageRouter;
