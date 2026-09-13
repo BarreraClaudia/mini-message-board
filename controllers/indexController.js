@@ -1,7 +1,7 @@
-import { getMessages } from '../models/db.js';
+import { getAllMessages } from '../db/queries.js';
 
 async function getIndex(req, res) {
-  const messages = await getMessages();
+  const messages = await getAllMessages();
   res.render('index', { messages: messages });
 }
 

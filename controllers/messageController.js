@@ -1,4 +1,4 @@
-import { getMessage, addMessage } from '../models/db.js';
+import { getMessage, insertMessage } from '../db/queries.js';
 import { body, validationResult, matchedData } from 'express-validator';
 
 const validateMessage = [
@@ -21,9 +21,9 @@ const validateMessage = [
 async function getMessageById(req, res) {
   const message = await getMessage(req.params.id);
   if (!message) {
-    return res.status(404).send('Message not found');
+    return res.status(404).render('404');
   }
-  res.render('message', { message: message });
+  res.render('message', { msg: message });
 }
 
 function getMessageForm(req, res) {
@@ -43,7 +43,7 @@ const postMessage = [
     }
 
     const { messageUser, messageText } = matchedData(req);
-    await addMessage(messageUser, messageText);
+    await insertMessage(messageUser, messageText);
     res.redirect('/');
   },
 ];

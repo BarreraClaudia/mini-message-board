@@ -4,19 +4,19 @@
         <span class="message-page__icon mdi mdi-flower-outline" aria-hidden="true"></span>
 
         <h1 class="message-page-user">
-            <%= message.user %>'s Message
+            <%= msg.name %>'s Message
         </h1>
 
         <p class="message-page-text">
-            <%= message.text %>
+            <%= msg.message %>
         </p>
 
         <p class="message-page-date">
             <span class="mdi mdi-clock-outline" aria-hidden="true"></span>
             Sent on
-            <time class="js-local-date" data-prefix="on " datetime="<%= message.added.toISOString() %>">
-                <%= message.added.toLocaleDateString() %> at <%= message.added.toLocaleTimeString([], { hour: '2-digit'
-                        , minute: '2-digit' }) %>
+            <time class="js-local-date" data-prefix="on " datetime="<%= msg.created_at.toISOString() %>">
+                <%= msg.created_at.toLocaleDateString() %> at <%= msg.created_at.toLocaleTimeString([], {
+                        hour: '2-digit' , minute: '2-digit' }) %>
             </time>
         </p>
 

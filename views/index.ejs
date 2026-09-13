@@ -19,7 +19,7 @@
             </div>
             <% } else { %>
                 <ul class="messages-list">
-                    <% messages.forEach((message, index)=> {
+                    <% messages.forEach((msg, index)=> {
                         const tone = tones[index % tones.length];
                         const tapeIcon = tapeIcons[index % tapeIcons.length];
                         %>
@@ -31,24 +31,24 @@
                             <div class="message-list-item__top">
                                 <span class="message-user">
                                     <span class="mdi mdi-account-heart-outline" aria-hidden="true"></span>
-                                    <%= message.user %>
+                                    <%= msg.name %>
                                 </span>
 
                                 <span class="message-date">
                                     <span class="mdi mdi-clock-outline" aria-hidden="true"></span>
-                                    <time class="js-local-date" datetime="<%= message.added.toISOString() %>">
-                                        <%= message.added.toLocaleDateString() %> at <%=
-                                                message.added.toLocaleTimeString([], { hour: '2-digit' ,
+                                    <time class="js-local-date" datetime="<%= msg.created_at.toISOString() %>">
+                                        <%= msg.created_at.toLocaleDateString() %> at <%=
+                                                msg.created_at.toLocaleTimeString([], { hour: '2-digit' ,
                                                 minute: '2-digit' }) %>
                                     </time>
                                 </span>
                             </div>
 
                             <p class="message-text">
-                                <%= message.text %>
+                                <%= msg.message %>
                             </p>
 
-                            <a href="/message/<%= index %>" class="message-link">
+                            <a href="/message/<%= msg.id %>" class="message-link">
                                 Open
                                 <span class="mdi mdi-arrow-right" aria-hidden="true"></span>
                             </a>
