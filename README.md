@@ -5,24 +5,44 @@ A tiny Express + EJS message board. Post and read messages.
 ## Tech stack
 
 - Express
+- PostgreSQL via pg
+- express-validator for data validation
 - EJS
 - Vanilla CSS
-- In-memory data store (messages reset when the server restarts)
 
-## Getting started
+## Getting started (development)
 
-```bash
-npm install
-npm start
+1. Set up a local PostgreSQL database and add its connection string to a `.env` file:
+
+```
+   DATABASE_URL=postgresql://username:password@localhost:5432/database_name
 ```
 
-For auto-restart on file changes during development:
+2. Seed the database (creates the `messages` table and adds a few starter messages):
 
 ```bash
-npm run dev
+   node db/populatedb.js "<DATABASE_URL>"
+```
+
+3. Install dependencies and start the server:
+
+```bash
+   npm install
+   npm run dev
 ```
 
 Then open [http://localhost:3000](http://localhost:3000)
+
+## Production
+
+Server is hosted on Render
+
+- Start command: `node app.js`
+- Environment variables: DATABASE_URL
+
+Database is hosted on Neon
+
+- During set up ran `node db/populatedb.js "<DATABASE_URL>"` to create/seed the messages table
 
 ## Project structure
 
@@ -30,9 +50,11 @@ Then open [http://localhost:3000](http://localhost:3000)
 ├── app.js                      # Express app setup and route mounting
 ├── controllers/
 │   ├── indexController.js      # Renders the message list
-│   └── messageController.js    # Renders/creates individual messages
-├── models/
-│   └── db.js                   # In-memory "database" of messages
+│   └── messageController.js    # Validates, renders, and creates messages
+├── db/
+│   ├── pool.js                 # PostgreSQL connection pool
+│   ├── queries.js              # SQL queries (get all, get by id, insert)
+│   └── populatedb.js           # One-off script to create/seed the messages table
 ├── routes/
 │   ├── indexRouter.js          # GET /
 │   ├── newMessageRouter.js     # GET & POST /new
@@ -41,6 +63,7 @@ Then open [http://localhost:3000](http://localhost:3000)
 │   ├── partials/
 │   │   ├── header.ejs          # opens <html>, <head>, opens <body>, site header, opens <main>
 │   │   └── footer.ejs          # closes <main>, site footer, closes </body> and </html>
+│   │   └── errors.ejs          # Renders a list of validation error messages, if any
 │   ├── index.ejs               # Message list / home page
 │   ├── message.ejs             # Single message detail page
 │   ├── form.ejs                # New message form
@@ -49,6 +72,16 @@ Then open [http://localhost:3000](http://localhost:3000)
 └── public/
     └── styles.css              # All site styling
 ```
+
+## Data & validation
+
+Messages are stored in a PostgreSQL `messages` table (`id`, `name`, `message`, `created_at`), set up by `db/populatedb.js` and queried through `db/queries.js`.
+
+Submissions to `/new` are validated with express-validator before being saved:
+
+- **Name** — required, alphabetic characters only, 1–32 characters
+- **Message** — required, up to 200 characters
+  If validation fails, the form re-renders with the submitted values kept in place and the relevant error messages listed above the fields (see `views/partials/errors.ejs`).
 
 ## Design
 
@@ -62,6 +95,8 @@ Then open [http://localhost:3000](http://localhost:3000)
 | Porcelain | `#F0F4EF` | Page background                  |
 | Dry Sage  | `#BFCC94` | Secondary accent, empty states   |
 
+Form validation errors use a dedicated `--error` color (a deep berry tone) rather than a generic red, to stay in harmony with the rest of the palette.
+
 **Type**
 
 - Display: [Fraunces](https://fonts.google.com/specimen/Fraunces) (italic) for headings
@@ -73,6 +108,6 @@ All colors, fonts, and spacing are defined as CSS custom properties at the top o
 
 ## Notes
 
-- Messages are stored in memory (`models/db.js`) and will reset every time the server restarts. Swap in a real database to persist data.
+- Data is now persisted in PostgreSQL rather than in memory, so messages survive server restarts.
 - Fonts (Fraunces, Quicksand) load from Google Fonts, and icons load from the jsDelivr-hosted MDI font. Both linked in `views/partials/header.ejs`
 - To browse or look up icon names, use the [Pictogrammers MDI library](https://pictogrammers.com/library/mdi/) — it's just a reference site, not something the app loads from directly.
